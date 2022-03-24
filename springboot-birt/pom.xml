@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.1.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>rechard.learn.springboot</groupId>
+	<artifactId>birt</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>birt</name>
+	<description>Spring Boot intergrate birt</description>
+
+	<properties>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <!-- BIRT dependencies -->
+		<dependency>
+			<groupId>org.eclipse.birt.runtime</groupId>
+			<artifactId>org.eclipse.birt.runtime</artifactId>
+			<version>4.4.2</version>
+			<exclusions>
+				<exclusion>
+					<groupId>dom4j</groupId>
+					<artifactId>dom4j</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>dom4j</groupId>
+					<artifactId>dom4j</artifactId>
+				</exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.birt.runtime</groupId>
+                    <artifactId>org.eclipse.orbit.mongodb</artifactId>
+                </exclusion>
+			</exclusions>
+		</dependency>
+        <!-- https://mvnrepository.com/artifact/org.hectorclient/hector-core -->
+        <dependency>
+            <groupId>org.hectorclient</groupId>
+            <artifactId>hector-core</artifactId>
+            <version>1.1-4</version>
+        </dependency>
+
+    </dependencies>
+
+	<build>
+<!-- 设置war包名称 -->    
+    <finalName>springboot-birt</finalName> 
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>2.1.1.RELEASE</version>
+			</plugin>
+			
+		<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<!-- 直接访问 Tomcat 服务器的 manager -->
+					<url>http://localhost:8080/manager</url>
+					<server>tomcat9</server><!-- 此处的名字必须和setting.xml中配置的ID一致-->
+					<username>tomcat</username>
+					<password>tomcat</password>
+					<skip>true</skip><!-- 跳过测试 -->
+					<update>true</update>
+					<ignorePackaging>false</ignorePackaging>
+					<path>/springboot-birt</path><!-- 此处的名字是项目发布的工程名-->
+				</configuration>
+			</plugin>
+
+
+		</plugins>
+	</build>
+
+</project>
